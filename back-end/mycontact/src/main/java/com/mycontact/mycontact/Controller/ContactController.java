@@ -40,16 +40,13 @@ public class ContactController {
     @PostMapping("/contacts")
     public Contact addContact(@RequestBody Contact contact) {
         contact.setId(0);
-
         Contact thisContact = contactService.save(contact);
-
         return contactService.save(thisContact);
     }
 
     @PutMapping("/contacts")
     public Contact updateContact(@RequestBody Contact contact) {
         Contact theContact = contactService.save(contact);
-
         return theContact;
     }
 
