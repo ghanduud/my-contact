@@ -2,6 +2,7 @@ backend v2:
 authentication + authorization
 search
 pagination + sorting
+partial update on data (patch).
 
 
 
