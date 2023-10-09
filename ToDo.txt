@@ -1,0 +1,9 @@
+backend v2:
+authentication + authorization
+search
+pagination
+
+
+
+frontend v2:
+sort by "name, email , phone number , etc..."
