@@ -3,6 +3,7 @@ package com.mycontact.mycontact.Controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mycontact.mycontact.Model.Contact;
 import com.mycontact.mycontact.Service.ContactService;
-
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -44,10 +44,9 @@ public class ContactController {
         return contactService.save(thisContact);
     }
 
-    @PutMapping("/contacts")
-    public Contact updateContact(@RequestBody Contact contact) {
-        Contact theContact = contactService.save(contact);
-        return theContact;
+    @PutMapping("/contacts/{id}")
+    public void updateContact(@PathVariable int id, @RequestBody Contact contact) {
+        contactService.updateContact(id, contact);
     }
 
     @DeleteMapping("/contacts/{id}")

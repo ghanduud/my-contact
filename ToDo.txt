@@ -1,9 +1,10 @@
 backend v2:
 authentication + authorization
 search
-pagination
+pagination + sorting
 
 
 
 frontend v2:
-sort by "name, email , phone number , etc..."
+sort by "name, email , phone number , etc..." (ascending + descending) on click
+drag a contact to another position
