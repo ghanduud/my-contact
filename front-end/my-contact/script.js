@@ -9,11 +9,13 @@ const btnsCloses = document.querySelectorAll('.btnClose');
 const loadingMessage = document.getElementById('loading-message');
 
 const api = 'http://localhost:8080/api/v1/';
+const contacts = []
 
 // Fetch data from the API
 fetch(`${api}contacts`)
 	.then((response) => response.json())
 	.then((data) => {
+		console.log(data);
 		// Save the fetched contacts in the 'contacts' array
 		contacts.push(...data);
 
@@ -103,9 +105,9 @@ function addUser(event) {
 
 	// Create the new contact object
 	const newContact = {
-		user_name: userName,
+		userName: userName,
 		email: userEmail,
-		phone_number: phoneNumber,
+		phoneNumber: phoneNumber,
 		address,
 	};
 
@@ -142,9 +144,9 @@ function addUser(event) {
 function addContactToTable(contact) {
 	const html = `
 	  <tr data-contact-id="${contact.id}">
-		<td>${contact.user_name}</td>
+		<td>${contact.userName}</td>
 		<td>${contact.email}</td>
-		<td>${contact.phone_number}</td>
+		<td>${contact.phoneNumber}</td>
 		<td>${contact.address}</td>
 		<td><button class="btnEdit">Edit</button></td>
 		<td><button class="btnDelete">Delete</button></td>
@@ -163,7 +165,7 @@ function handleContactSearch(event) {
 
 	const filteredContacts = contacts.filter(
 		(contact) =>
-			contact.user_name.toLowerCase().includes(searchQuery) || contact.phone_number.includes(searchQuery)
+			contact.userName.toLowerCase().includes(searchQuery) || contact.phoneNumber.includes(searchQuery)
 	);
 
 	clearTable();
@@ -187,9 +189,9 @@ function handleEdit(event) {
 
 		if (contact) {
 			// Fill the edit form fields with the contact's data
-			document.getElementById('user-name').value = contact.user_name;
+			document.getElementById('user-name').value = contact.userName;
 			document.getElementById('user-email').value = contact.email;
-			document.getElementById('phone-number').value = contact.phone_number;
+			document.getElementById('phone-number').value = contact.phoneNumber;
 			document.getElementById('address').value = contact.address;
 
 			// Show the edit form
@@ -228,9 +230,9 @@ function updateContact(event) {
 
 	if (contact) {
 		// Update the contact's data
-		contact.user_name = userName;
+		contact.userName = userName;
 		contact.email = userEmail;
-		contact.phone_number = phoneNumber;
+		contact.phoneNumber = phoneNumber;
 		contact.address = address;
 
 		// Update the contact's data in the table
@@ -266,13 +268,14 @@ function updateContact(event) {
 }
 
 function updateContactInTable(contact) {
+	console.log(contact);
 	const row = table.querySelector(`tr[data-contact-id="${contact.id}"]`);
 
 	if (row) {
 		row.innerHTML = `
-		<td>${contact.user_name}</td>
+		<td>${contact.userName}</td>
 		<td>${contact.email}</td>
-		<td>${contact.phone_number}</td>
+		<td>${contact.phoneNumber}</td>
 		<td>${contact.address}</td>
 		<td><button class="btnEdit">Edit</button></td>
 		<td><button class="btnDelete">Delete</button></td>

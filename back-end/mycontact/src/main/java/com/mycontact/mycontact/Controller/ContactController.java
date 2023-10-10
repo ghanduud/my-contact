@@ -16,7 +16,7 @@ import com.mycontact.mycontact.Model.Contact;
 import com.mycontact.mycontact.Service.ContactService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RequestMapping("/api/v1")
 public class ContactController {
     ContactService contactService;
