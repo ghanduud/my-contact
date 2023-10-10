@@ -1,13 +1,69 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<title>My contact</title>
+	</head>
+	<body>
+		<header class="header section">
+			<h1 class="h-1">My contact</h1>
+		</header>
+		<main class="contacts">
+			<div class="table-container">
+				<table class="contact-table">
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Phone number</th>
+						<th>Address</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</table>
+			</div>
+
+			<div id="loading-message">Loading...</div>
+
+			<aside class="side-contact">
+				<input type="search" name="contactSearch" id="contact-search" />
+				<label for="contact-search">Search</label>
+
+				<button class="btnAddContact">Add Contact</button>
+			</aside>
+		</main>
+
+		<div class="form-container form-container__add hidden">
+			<form action="" class="gform add-form">
+				<button type="button" class="btnClose">X</button>
+				<input type="text" name="userName" id="add-user-name" class="form-input" required />
+				<label for="add-user-name">Contact Name</label>
+				<input type="email" name="userEmail" id="add-user-email" class="form-input" required />
+				<label for="add-user-email">Contact Email</label>
+				<input type="number" name="phoneNumber" id="add-phone-number" class="form-input" required />
+				<label for="add-phone-number">Contact Phone Number</label>
+				<input type="text" name="address" id="add-address" class="form-input" required />
+				<label for="add-address">Contact Address</label>
+				<button type="submit" class="btnAddUser form-btn">Add User</button>
+			</form>
+		</div>
+
+		<div class="form-container form-container__edit hidden">
+			<form action="" class="gform edit-form">
+				<button type="button" class="btnClose">X</button>
+				<input type="text" name="userName" id="user-name" class="form-input" required />
+				<label for="user-name">Contact Name</label>
+				<input type="email" name="userEmail" id="user-email" class="form-input" required />
+				<label for="user-email">Contact Email</label>
+				<input type="number" name="phoneNumber" id="phone-number" class="form-input" required />
+				<label for="phone-number">Contact Phone Number</label>
+				<input type="text" name="address" id="address" class="form-input" required />
+				<label for="address">Contact Address</label>
+				<button type="submit" class="btnEditUser form-btn">Edit User</button>
+			</form>
+		</div>
+
+		<script src="script.js"></script>
+	</body>
 </html>
