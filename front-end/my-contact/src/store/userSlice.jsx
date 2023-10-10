@@ -11,14 +11,14 @@ const initialState = {
 		},
 		{
 			id: 2,
-			user_name: '3omda',
+			user_name: 'Ghandy',
 			email: 'omar.ghandy780@gmail.com',
 			phone_number: '+201020455089',
 			address: 'cairo',
 		},
 		{
 			id: 3,
-			user_name: 'shamy',
+			user_name: 'Ghandy',
 			email: 'omar.ghandy780@gmail.com',
 			phone_number: '+201020455089',
 			address: 'cairo',

@@ -1,13 +1,7 @@
-import { Provider } from 'react-redux';
-import store from './store/store'; // Import your Redux store
-import Home from './pages/Home';
+import './App.css';
 
 function App() {
-	return (
-		<Provider store={store}>
-			<Home />
-		</Provider>
-	);
+	return <></>;
 }
 
 export default App;
