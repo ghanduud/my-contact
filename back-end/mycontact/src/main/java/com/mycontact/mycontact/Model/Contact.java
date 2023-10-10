@@ -20,7 +20,6 @@ public class Contact {
     private String userName;
 
     @Column(name = "email")
-    @Size(min = 1, max = 10)
     private String email;
 
     @Column(name = "phone_number")
