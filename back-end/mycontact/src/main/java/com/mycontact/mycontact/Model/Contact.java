@@ -16,7 +16,7 @@ public class Contact {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "user_name")
+    @Column(name = "user_name", unique = true, nullable = false)
     private String userName;
 
     @Column(name = "email")
