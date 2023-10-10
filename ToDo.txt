@@ -1,8 +1,9 @@
 backend v2:
-authentication + authorization
-search
-pagination + sorting
-partial update on data (patch).
+authentication + linking users to their contact.
+search (optional).
+pagination + sorting.
+partial update on data (patch). // ksomo
+validation
 
 
 

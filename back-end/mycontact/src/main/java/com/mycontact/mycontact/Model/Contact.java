@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "contacts")
@@ -19,6 +20,7 @@ public class Contact {
     private String userName;
 
     @Column(name = "email")
+    @Size(min = 1, max = 10)
     private String email;
 
     @Column(name = "phone_number")
@@ -54,7 +56,7 @@ public class Contact {
         this.userName = name;
     }
 
-    public String getEmail() {
+    public String getEmail() { 
         return email;
     }
 
