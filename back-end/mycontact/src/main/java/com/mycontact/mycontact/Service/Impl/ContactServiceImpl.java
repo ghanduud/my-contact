@@ -50,5 +50,21 @@ public class ContactServiceImpl implements ContactService {
     public void removeContact(int id) {
         contactRepository.deleteById(id);
     }
+
+    @Override
+    public void updateContact(int id, Contact contact) {
+        Optional<Contact> thisContact = contactRepository.findById(id);
+        if (!thisContact.isPresent()) {
+            System.out.println("Contact not found");
+        }
+
+        Contact newContact = thisContact.get();
+        newContact.setUserName(contact.getUserName());
+        newContact.setAddress(contact.getAddress());
+        newContact.setEmail(contact.getEmail());
+        newContact.setPhoneNumber(contact.getPhoneNumber());
+
+        contactRepository.save(newContact);
+    }
     
 }

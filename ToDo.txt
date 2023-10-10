@@ -1,0 +1,12 @@
+backend v2:
+authentication + linking users to their contact.
+search (optional).
+pagination + sorting.
+partial update on data (patch). // ksomo
+validation
+
+
+
+frontend v2:
+sort by "name, email , phone number , etc..." (ascending + descending) on click
+drag a contact to another position
