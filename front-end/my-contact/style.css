@@ -129,9 +129,97 @@ body {
 
 .contacts {
 	display: flex;
-	justify-content: space-between;
+	align-items: start;
 }
 
 .hidden {
 	display: none;
+}
+
+.table-container {
+	width: 75vw;
+	min-height: 75vh;
+	font-size: 1.7rem;
+	border-right: 0.1rem solid #101110;
+}
+
+.contact-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.contact-table th,
+.contact-table td {
+	padding: 1rem;
+}
+
+.contact-table th {
+	background-color: #000;
+	color: #ce1b28;
+	text-align: start;
+}
+
+.contact-table td {
+	color: #101110;
+}
+
+.contact-table tr {
+	border-bottom: #999 0.1rem solid;
+}
+
+.contact-table tr:nth-child(even) {
+	background-color: #fff;
+}
+
+.contact-table tr:nth-child(odd) {
+	background-color: #ccc;
+}
+
+#loading-message {
+	text-align: center;
+	margin-top: 5rem;
+	font-weight: 800;
+	font-size: 3rem;
+}
+
+.side-contact {
+	position: sticky;
+	top: 0;
+	width: 25vw;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 10rem 5rem;
+}
+
+#contact-search {
+	width: 100%;
+	margin-bottom: 10rem;
+	border: none;
+	box-shadow: 0 1rem 2rem #222;
+	font-size: 2rem;
+	padding: 1rem 2rem;
+	outline: none;
+	border-radius: 1rem;
+}
+
+.btnAddContact {
+	font-size: 2.5rem;
+	border: none;
+	border-radius: 1rem;
+	padding: 1rem 3rem;
+	color: #fff;
+	background-color: #ce1b28;
+	cursor: pointer;
+}
+
+.btnEdit,
+.btnDelete {
+	color: #fff;
+	background-color: #ce1b28;
+	cursor: pointer;
+	border: none;
+	border-radius: 1rem;
+	padding: 1rem 3rem;
+	font-size: 1.7rem;
 }
