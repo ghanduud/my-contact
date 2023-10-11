@@ -9,7 +9,7 @@ const btnsCloses = document.querySelectorAll('.btnClose');
 const loadingMessage = document.getElementById('loading-message');
 
 const api = 'http://localhost:8080/api/v1/';
-const contacts = []
+const contacts = [];
 
 // Fetch data from the API
 fetch(`${api}contacts`)
@@ -62,18 +62,17 @@ function handleDelete(event) {
 		const index = contacts.findIndex((contact) => contact.id === id);
 
 		if (index !== -1) {
-			// Remove the contact from the array
-			const deletedContact = contacts.splice(index, 1)[0];
-
-			// Remove the row from the table
-			row.remove();
-
 			// Send DELETE request to the API
 			fetch(`${api}contacts/${id}`, {
 				method: 'DELETE',
 			})
 				.then((response) => {
 					if (response.ok) {
+						// Remove the contact from the array
+						contacts.splice(index, 1);
+
+						// Remove the row from the table
+						row.remove();
 						console.log('Contact deleted successfully');
 					} else {
 						throw new Error('Failed to delete contact');
@@ -229,15 +228,6 @@ function updateContact(event) {
 	const contact = contacts.find((contact) => contact.id === contactId);
 
 	if (contact) {
-		// Update the contact's data
-		contact.userName = userName;
-		contact.email = userEmail;
-		contact.phoneNumber = phoneNumber;
-		contact.address = address;
-
-		// Update the contact's data in the table
-		updateContactInTable(contact);
-
 		// Send PUT request to the API
 		fetch(`${api}contacts/${contactId}`, {
 			method: 'PUT',
@@ -248,6 +238,14 @@ function updateContact(event) {
 		})
 			.then((response) => {
 				if (response.ok) {
+					// Update the contact's data
+					contact.userName = userName;
+					contact.email = userEmail;
+					contact.phoneNumber = phoneNumber;
+					contact.address = address;
+
+					// Update the contact's data in the table
+					updateContactInTable(contact);
 					console.log('Contact updated successfully');
 				} else {
 					throw new Error('Failed to update contact');
