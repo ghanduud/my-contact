@@ -204,7 +204,7 @@ function showEditForm(contact) {
 	editUserForm.dataset.contactId = contact.id;
 
 	// Remove the "hidden" class to show the edit form
-	editUserFormContaine.classList.remove('hidden');
+	editUserFormContainer.classList.remove('hidden');
 
 	// Add event listener to the edit form for handling form submission
 	editUserForm.addEventListener('submit', updateContact);
