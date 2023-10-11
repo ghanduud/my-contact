@@ -200,17 +200,14 @@ function handleEdit(event) {
 }
 
 function showEditForm(contact) {
-	const editFormContainer = document.querySelector('.form-container__edit');
-	const editForm = document.querySelector('.edit-form');
-
 	// Set the contact's ID as a data attribute on the form for future reference
-	editForm.dataset.contactId = contact.id;
+	editUserForm.dataset.contactId = contact.id;
 
 	// Remove the "hidden" class to show the edit form
-	editFormContainer.classList.remove('hidden');
+	editUserFormContaine.classList.remove('hidden');
 
 	// Add event listener to the edit form for handling form submission
-	editForm.addEventListener('submit', updateContact);
+	editUserForm.addEventListener('submit', updateContact);
 }
 
 function updateContact(event) {
@@ -260,8 +257,7 @@ function updateContact(event) {
 		this.reset();
 
 		// Hide the edit form
-		const editFormContainer = document.querySelector('.form-container__edit');
-		editFormContainer.classList.add('hidden');
+		editUserFormContainer.classList.add('hidden');
 	}
 }
 
