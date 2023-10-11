@@ -3,13 +3,15 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" />
 		<link rel="stylesheet" href="style.css" />
 		<title>My contact</title>
 	</head>
 	<body>
-		<header class="header section">
+		<header class="header-section">
 			<h1 class="h-1">My contact</h1>
 		</header>
+
 		<main class="contacts">
 			<div class="table-container">
 				<table class="contact-table">
@@ -22,9 +24,8 @@
 						<th>Delete</th>
 					</tr>
 				</table>
+				<div id="loading-message">Loading...</div>
 			</div>
-
-			<div id="loading-message">Loading...</div>
 
 			<aside class="side-contact">
 				<input type="search" name="contactSearch" id="contact-search" />
@@ -36,30 +37,86 @@
 
 		<div class="form-container form-container__add hidden">
 			<form action="" class="gform add-form">
-				<button type="button" class="btnClose">X</button>
-				<input type="text" name="userName" id="add-user-name" class="form-input" required />
-				<label for="add-user-name">Contact Name</label>
-				<input type="email" name="email" id="add-user-email" class="form-input" required />
-				<label for="add-user-email">Contact Email</label>
-				<input type="number" name="phoneNumber" id="add-phone-number" class="form-input" required />
-				<label for="add-phone-number">Contact Phone Number</label>
-				<input type="text" name="address" id="add-address" class="form-input" required />
-				<label for="add-address">Contact Address</label>
+				<button type="button" class="btnClose">&#x2715;</button>
+				<input
+					type="text"
+					name="userName"
+					id="add-user-name"
+					class="form-input"
+					required
+					placeholder="Contact Name"
+					autocomplete="off" />
+				<label for="add-user-name" class="gform__label">Contact Name</label>
+				<input
+					type="email"
+					name="email"
+					id="add-user-email"
+					class="form-input"
+					required
+					placeholder="Contact Email"
+					autocomplete="off" />
+				<label for="add-user-email" class="gform__label">Contact Email</label>
+				<input
+					type="number"
+					name="phoneNumber"
+					id="add-phone-number"
+					class="form-input"
+					required
+					placeholder="Phone Number"
+					autocomplete="off" />
+				<label for="add-phone-number" class="gform__label">Contact Phone Number</label>
+				<input
+					type="text"
+					name="address"
+					id="add-address"
+					class="form-input"
+					required
+					placeholder="Address"
+					autocomplete="off" />
+				<label for="add-address" class="gform__label">Contact Address</label>
 				<button type="submit" class="btnAddUser form-btn">Add User</button>
 			</form>
 		</div>
 
 		<div class="form-container form-container__edit hidden">
 			<form action="" class="gform edit-form">
-				<button type="button" class="btnClose">X</button>
-				<input type="text" name="userName" id="user-name" class="form-input" required />
-				<label for="user-name">Contact Name</label>
-				<input type="email" name="email" id="user-email" class="form-input" required />
-				<label for="user-email">Contact Email</label>
-				<input type="number" name="phoneNumber" id="phone-number" class="form-input" required />
-				<label for="phone-number">Contact Phone Number</label>
-				<input type="text" name="address" id="address" class="form-input" required />
-				<label for="address">Contact Address</label>
+				<button type="button" class="btnClose">&#x2715;</button>
+				<input
+					type="text"
+					name="userName"
+					id="user-name"
+					class="form-input"
+					required
+					placeholder="Contact Name"
+					autocomplete="off" />
+				<label for="user-name" class="gform__label">Contact Name</label>
+				<input
+					type="email"
+					name="email"
+					id="user-email"
+					class="form-input"
+					required
+					placeholder="Contact Email"
+					autocomplete="off" />
+				<label for="user-email" class="gform__label">Contact Email</label>
+				<input
+					type="number"
+					name="phoneNumber"
+					id="phone-number"
+					class="form-input"
+					required
+					placeholder="Phone Number"
+					autocomplete="off" />
+				<label for="phone-number" class="gform__label">Contact Phone Number</label>
+				<input
+					type="text"
+					name="address"
+					id="address"
+					class="form-input"
+					required
+					placeholder="Address"
+					autocomplete="off" />
+				<label for="address" class="gform__label">Contact Address</label>
 				<button type="submit" class="btnEditUser form-btn">Edit User</button>
 			</form>
 		</div>

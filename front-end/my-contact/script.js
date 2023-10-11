@@ -39,6 +39,25 @@ btnsCloses.forEach((btn) => {
 		editUserFormContainer.classList.add('hidden');
 	});
 });
+
+document.addEventListener('keydown', (event) => {
+	if (event.key === 'Escape') {
+		addUserFormContainer.classList.add('hidden');
+		editUserFormContainer.classList.add('hidden');
+	}
+});
+
+addUserFormContainer.addEventListener('click', (event) => {
+	if (event.target === addUserFormContainer) {
+		addUserFormContainer.classList.add('hidden');
+	}
+});
+
+editUserFormContainer.addEventListener('click', (event) => {
+	if (event.target === editUserFormContainer) {
+		editUserFormContainer.classList.add('hidden');
+	}
+});
 // Add event listener to the table for handling delete button clicks
 table.addEventListener('click', handleDelete);
 
