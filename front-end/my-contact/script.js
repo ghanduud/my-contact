@@ -244,13 +244,21 @@ function updateContact(event) {
 	const contact = contacts.find((contact) => contact.id === contactId);
 
 	if (contact) {
+		const temp = {
+			id: contact.id,
+			userName,
+			email: userEmail,
+			phoneNumber,
+			address,
+		};
+
 		// Send PUT request to the API
 		fetch(`${api}contacts/${contactId}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify(contact),
+			body: JSON.stringify(temp),
 		})
 			.then((response) => {
 				if (response.ok) {
