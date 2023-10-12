@@ -8,6 +8,13 @@
 
 html {
 	font-size: 62.5%;
+	@media (max-width: 1200px) {
+		font-size: 50%;
+	}
+
+	@media (max-width: 750px) {
+		font-size: 40%;
+	}
 }
 
 body {
@@ -129,6 +136,9 @@ body {
 	background-image: linear-gradient(145deg, #ce1b28 0%, #101110 74%);
 	background-size: cover;
 	color: #eee;
+	@media (max-width: 750px) {
+		height: 15vh;
+	}
 }
 .h-1 {
 	font-weight: 300;
@@ -140,6 +150,9 @@ body {
 .contacts {
 	display: flex;
 	align-items: start;
+	@media (max-width: 1000px) {
+		flex-direction: column-reverse;
+	}
 }
 
 .hidden {
@@ -151,6 +164,10 @@ body {
 	min-height: 75vh;
 	font-size: 1.7rem;
 	border-right: 0.1rem solid #101110;
+	@media (max-width: 1000px) {
+		width: 100%;
+		border: none;
+	}
 }
 
 .contact-table {
@@ -200,6 +217,14 @@ body {
 	flex-direction: column;
 	align-items: center;
 	padding: 10rem 5rem;
+	@media (max-width: 1000px) {
+		width: 100%;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		padding: 2rem 2rem;
+		background-color: #888;
+	}
 }
 
 #contact-search {
@@ -211,6 +236,11 @@ body {
 	padding: 1rem 2rem;
 	outline: none;
 	border-radius: 1rem;
+	@media (max-width: 1000px) {
+		margin-bottom: 0;
+		width: 70%;
+		margin-right: 2rem;
+	}
 }
 
 .btnAddContact {
@@ -242,6 +272,9 @@ body {
 	padding: 1rem 3rem;
 	font-size: 1.7rem;
 	transition: all 0.1s;
+	@media (max-width: 750px) {
+		padding: 1rem 1.5rem;
+	}
 }
 
 .btnEdit:hover,
