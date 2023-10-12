@@ -109,6 +109,16 @@ body {
 	background-color: #eee;
 	color: #ce1b28;
 	padding: 1rem 3rem;
+	transition: all 0.1s;
+}
+
+.form-btn:hover {
+	transform: translateY(-0.1rem);
+	box-shadow: 0 0.5rem 1rem #222;
+}
+
+.form-btn:active {
+	transform: translateY(0.1rem);
 }
 
 .header-section {
@@ -213,6 +223,15 @@ body {
 	cursor: pointer;
 }
 
+.btnAddContact:hover {
+	transform: translateY(-0.1rem);
+	box-shadow: 0 0.5rem 1rem #222;
+}
+
+.btnAddContact:active {
+	transform: translateY(0.1rem);
+}
+
 .btnEdit,
 .btnDelete {
 	color: #fff;
@@ -222,4 +241,16 @@ body {
 	border-radius: 1rem;
 	padding: 1rem 3rem;
 	font-size: 1.7rem;
+	transition: all 0.1s;
+}
+
+.btnEdit:hover,
+.btnDelete:hover {
+	transform: translateY(-0.1rem);
+	box-shadow: 0 0.5rem 1rem #222;
+}
+
+.btnEdit:active,
+.btnDelete:active {
+	transform: translateY(0.1rem);
 }
