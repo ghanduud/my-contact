@@ -355,6 +355,8 @@ function updateContactInList(contact) {
 				</div>
 			</div>
 		</div>`;
+	} else {
+		console.log(item);
 	}
 }
 
