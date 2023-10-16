@@ -73,6 +73,7 @@ addUserForm.addEventListener('submit', addUser);
 contactSearchInput.addEventListener('input', handleContactSearch);
 
 table.addEventListener('click', handleEdit);
+contactList.addEventListener('click', handleEdit);
 
 // Function to handle delete button clicks
 function handleDelete(event) {
@@ -218,7 +219,14 @@ function clearTable() {
 function handleEdit(event) {
 	if (event.target.classList.contains('btnEdit')) {
 		const row = event.target.closest('tr');
-		const id = parseInt(row.dataset.contactId);
+		const listItem = event.target.closest('li');
+		let id;
+
+		if (row) {
+			id = parseInt(row.dataset.contactId);
+		} else if (listItem) {
+			id = parseInt(listItem.dataset.contactId);
+		}
 
 		// Find the contact with the matching id
 		const contact = contacts.find((contact) => contact.id === id);
@@ -288,6 +296,7 @@ function updateContact(event) {
 
 					// Update the contact's data in the table
 					updateContactInTable(contact);
+					updateContactInList(contact);
 					console.log('Contact updated successfully');
 				} else {
 					throw new Error('Failed to update contact');
@@ -319,6 +328,33 @@ function updateContactInTable(contact) {
 		<td><button class="btnEdit">Edit</button></td>
 		<td><button class="btnDelete">Delete</button></td>
 	  `;
+	}
+}
+
+function updateContactInList(contact) {
+	console.log(contact);
+	const item = contactList.querySelector('li[data-contact-id="${contact.id}]');
+
+	if (item) {
+		item.innerHTML = `<input type="checkbox" name="expandContact" id="expand-contact" />
+		<div class="contact-info">
+			<div class="always-shown">
+				<div>
+					<p class="contact-name__list">${contact.userName}</p>
+					<p>${contact.phoneNumber}</p>
+				</div>
+			</div>
+			<div class="expand-shown">
+				<div>
+					<p>${contact.email}</p>
+					<p>${contact.address}</p>
+				</div>
+				<div>
+					<button class="btnEdit">Edit</button>
+					<button class="btnDelete">Delete</button>
+				</div>
+			</div>
+		</div>`;
 	}
 }
 
