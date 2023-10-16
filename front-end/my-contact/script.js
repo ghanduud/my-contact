@@ -7,7 +7,6 @@ const btnAddContact = document.querySelector('.btnAddContact');
 const contactSearchInput = document.getElementById('contact-search');
 const btnsCloses = document.querySelectorAll('.btnClose');
 const loadingMessage = document.getElementById('loading-message');
-const contactList = document.querySelector('.contact-list');
 
 const api = 'http://localhost:8080/api/v1/';
 const contacts = [];
@@ -26,7 +25,6 @@ fetch(`${api}contacts`)
 		// Iterate over the fetched contacts and add them to the table
 		contacts.forEach((contact) => {
 			addContactToTable(contact);
-			addContactToList(contact);
 		});
 	})
 	.catch((error) => {
@@ -73,79 +71,27 @@ contactSearchInput.addEventListener('input', handleContactSearch);
 
 table.addEventListener('click', handleEdit);
 
-// Function to add a contact to the table
-function addContactToTable(contact) {
-	const html = `
-	  <tr data-contact-id="${contact.id}">
-		<td>${contact.userName}</td>
-		<td>${contact.email}</td>
-		<td>${contact.phoneNumber}</td>
-		<td>${contact.address}</td>
-		<td><button class="btnEdit">Edit</button></td>
-		<td><button class="btnDelete">Delete</button></td>
-	  </tr>`;
-
-	table.insertAdjacentHTML('beforeend', html);
-}
-
-function addContactToList(contact) {
-	const html = `
-	<li class="contact-number" data-contact-id="${contact.id}">
-						<input type="checkbox" name="expandContact" id="expand-contact" />
-						<div class="contact-info">
-							<div class="always-shown">
-								<div>
-									<p class="contact-name__list">${contact.userName}</p>
-									<p>${contact.phoneNumber}</p>
-								</div>
-							</div>
-							<div class="expand-shown">
-								<div>
-									<p>${contact.email}</p>
-									<p>${contact.address}</p>
-								</div>
-								<div>
-									<button class="btnEdit">Edit</button>
-									<button class="btnDelete">Delete</button>
-								</div>
-							</div>
-						</div>
-					</li>
-	`;
-
-	contactList.insertAdjacentHTML('beforeend', html);
-}
-// Function to handle delete button clicks
 // Function to handle delete button clicks
 function handleDelete(event) {
 	if (event.target.classList.contains('btnDelete')) {
 		const row = event.target.closest('tr');
-		const listItem = event.target.closest('li');
-		const id = parseInt(row ? row.dataset.contactId : listItem.dataset.contactId);
+		const id = parseInt(row.dataset.contactId);
 
 		// Find the contact with the matching id
 		const index = contacts.findIndex((contact) => contact.id === id);
 
 		if (index !== -1) {
-			// Remove the contact from the array
-			const deletedContact = contacts.splice(index, 1)[0];
-
-			// Remove the row from the table
-			if (row) {
-				row.remove();
-			}
-
-			// Remove the contact from the list
-			if (listItem) {
-				listItem.remove();
-			}
-
 			// Send DELETE request to the API
 			fetch(`${api}contacts/${id}`, {
 				method: 'DELETE',
 			})
 				.then((response) => {
 					if (response.ok) {
+						// Remove the contact from the array
+						contacts.splice(index, 1);
+
+						// Remove the row from the table
+						row.remove();
 						console.log('Contact deleted successfully');
 					} else {
 						throw new Error('Failed to delete contact');
@@ -198,7 +144,6 @@ function addUser(event) {
 
 			// Add the new contact to the table
 			addContactToTable(data);
-			addContactToList(data);
 
 			// Reset the form input values
 			addUserForm.reset();
@@ -212,6 +157,27 @@ function addUser(event) {
 		});
 }
 
+// Function to add a contact to the table
+// Function to add a contact to the table
+function addContactToTable(contact) {
+	const html = `
+	  <tr data-contact-id="${contact.id}">
+		<td>${contact.userName}</td>
+		<td>${contact.email}</td>
+		<td>${contact.phoneNumber}</td>
+		<td>${contact.address}</td>
+		<td><button class="btnEdit">Edit</button></td>
+		<td><button class="btnDelete">Delete</button></td>
+	  </tr>`;
+
+	table.insertAdjacentHTML('beforeend', html);
+}
+
+// Function to generate a unique id
+// function generateUniqueId() {
+// 	return Math.floor(Math.random() * 1000000) + 1;
+// }
+
 function handleContactSearch(event) {
 	const searchQuery = event.target.value.toLowerCase();
 
@@ -221,23 +187,14 @@ function handleContactSearch(event) {
 	);
 
 	clearTable();
-	clearList();
 
-	filteredContacts.forEach((contact) => {
-		addContactToTable(contact);
-		addContactToList(contact);
-	});
+	filteredContacts.forEach((contact) => addContactToTable(contact));
 }
 
 function clearTable() {
 	while (table.rows.length > 1) {
 		table.deleteRow(1);
 	}
-}
-
-function clearList() {
-	const contactList = document.getElementById('contact-list');
-	contactList.innerHTML = '';
 }
 
 function handleEdit(event) {
@@ -262,17 +219,14 @@ function handleEdit(event) {
 }
 
 function showEditForm(contact) {
-	const editFormContainer = document.querySelector('.form-container__edit');
-	const editForm = document.querySelector('.edit-form');
-
 	// Set the contact's ID as a data attribute on the form for future reference
-	editForm.dataset.contactId = contact.id;
+	editUserForm.dataset.contactId = contact.id;
 
 	// Remove the "hidden" class to show the edit form
-	editFormContainer.classList.remove('hidden');
+	editUserFormContainer.classList.remove('hidden');
 
 	// Add event listener to the edit form for handling form submission
-	editForm.addEventListener('submit', updateContact);
+	editUserForm.addEventListener('submit', updateContact);
 }
 
 function updateContact(event) {
@@ -290,17 +244,13 @@ function updateContact(event) {
 	const contact = contacts.find((contact) => contact.id === contactId);
 
 	if (contact) {
-		// Update the contact's data
-		contact.userName = userName;
-		contact.email = userEmail;
-		contact.phoneNumber = phoneNumber;
-		contact.address = address;
-
-		// Update the contact's data in the table
-		updateContactInTable(contact);
-
-		// Update the contact's data in the list
-		updateContactInList(contact);
+		const temp = {
+			id: contact.id,
+			userName,
+			email: userEmail,
+			phoneNumber,
+			address,
+		};
 
 		// Send PUT request to the API
 		fetch(`${api}contacts/${contactId}`, {
@@ -308,10 +258,18 @@ function updateContact(event) {
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify(contact),
+			body: JSON.stringify(temp),
 		})
 			.then((response) => {
 				if (response.ok) {
+					// Update the contact's data
+					contact.userName = userName;
+					contact.email = userEmail;
+					contact.phoneNumber = phoneNumber;
+					contact.address = address;
+
+					// Update the contact's data in the table
+					updateContactInTable(contact);
 					console.log('Contact updated successfully');
 				} else {
 					throw new Error('Failed to update contact');
@@ -326,8 +284,7 @@ function updateContact(event) {
 		this.reset();
 
 		// Hide the edit form
-		const editFormContainer = document.querySelector('.form-container__edit');
-		editFormContainer.classList.add('hidden');
+		editUserFormContainer.classList.add('hidden');
 	}
 }
 
@@ -345,24 +302,4 @@ function updateContactInTable(contact) {
 		<td><button class="btnDelete">Delete</button></td>
 	  `;
 	}
-}
-
-function updateContactInList(contact) {
-	const listItem = contactList.querySelector(`li[data-contact-id="${contact.id}"]`);
-
-	if (listItem) {
-		const contactName = listItem.querySelector('.contact-name__list');
-		const contactPhoneNumber = listItem.querySelector('.always-shown p:last-child');
-		const contactEmail = listItem.querySelector('.expand-shown p:first-child');
-		const contactAddress = listItem.querySelector('.expand-shown p:last-child');
-
-		// Update the contact's information in the list
-		contactName.textContent = contact.userName;
-		contactPhoneNumber.textContent = contact.phoneNumber;
-		contactEmail.textContent = contact.email;
-		contactAddress.textContent = contact.address;
-	}
-}
-function clearContactList() {
-	contactList.innerHTML = '';
 }
