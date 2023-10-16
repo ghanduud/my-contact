@@ -19,7 +19,7 @@ html {
 
 body {
 	background-color: #eee;
-	font-family: 'Lato', sans-serif;
+	font-family: "Lato", sans-serif;
 	font-weight: 400;
 	line-height: 1.7;
 }
@@ -167,11 +167,12 @@ body {
 	@media (max-width: 1000px) {
 		width: 100%;
 		border: none;
+		min-height: auto;
 	}
 
-	/* @media (max-width: 600px) {
+	@media (max-width: 600px) {
 		display: none;
-	} */
+	}
 }
 
 .contact-table {
