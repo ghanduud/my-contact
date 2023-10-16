@@ -206,8 +206,12 @@ function handleContactSearch(event) {
 	);
 
 	clearTable();
+	clearContactList();
 
-	filteredContacts.forEach((contact) => addContactToTable(contact));
+	filteredContacts.forEach((contact) => {
+		addContactToTable(contact);
+		addContactToList(contact);
+	});
 }
 
 function clearTable() {
