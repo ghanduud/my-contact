@@ -78,12 +78,19 @@ table.addEventListener('click', handleEdit);
 function handleDelete(event) {
 	if (event.target.classList.contains('btnDelete')) {
 		const row = event.target.closest('tr');
-		const id = parseInt(row.dataset.contactId);
+		const listItem = event.target.closest('li');
+		let id;
+
+		if (row) {
+			id = parseInt(row.dataset.contactId);
+		} else if (listItem) {
+			id = parseInt(listItem.dataset.contactId);
+		}
 
 		// Find the contact with the matching id
-		const index = contacts.findIndex((contact) => contact.id === id);
+		const contact = contacts.find((contact) => contact.id === id);
 
-		if (index !== -1) {
+		if (contact) {
 			// Send DELETE request to the API
 			fetch(`${api}contacts/${id}`, {
 				method: 'DELETE',
@@ -91,10 +98,17 @@ function handleDelete(event) {
 				.then((response) => {
 					if (response.ok) {
 						// Remove the contact from the array
+						const index = contacts.indexOf(contact);
 						contacts.splice(index, 1);
 
-						// Remove the row from the table
-						row.remove();
+						clearContactList();
+						clearTable();
+
+						contacts.forEach((contact) => {
+							addContactToTable(contact);
+							addContactToList(contact);
+						});
+
 						console.log('Contact deleted successfully');
 					} else {
 						throw new Error('Failed to delete contact');
@@ -334,4 +348,8 @@ function addContactToList(contact) {
 	`;
 
 	contactList.insertAdjacentHTML('beforeend', html);
+}
+
+function clearContactList() {
+	contactList.innerHTML = '';
 }
