@@ -62,6 +62,7 @@ editUserFormContainer.addEventListener('click', (event) => {
 });
 // Add event listener to the table for handling delete button clicks
 table.addEventListener('click', handleDelete);
+contactList.addEventListener('click', handleDelete);
 
 // Add event listener to the "Add User" button to show the add user form
 btnAddContact.addEventListener('click', showAddUserForm);
