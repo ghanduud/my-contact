@@ -168,6 +168,10 @@ body {
 		width: 100%;
 		border: none;
 	}
+
+	/* @media (max-width: 600px) {
+		display: none;
+	} */
 }
 
 .contact-table {
@@ -251,6 +255,10 @@ body {
 	color: #fff;
 	background-color: #ce1b28;
 	cursor: pointer;
+	@media (max-width: 500px) {
+		font-size: 2rem;
+		padding: 1rem;
+	}
 }
 
 .btnAddContact:hover {
@@ -286,4 +294,69 @@ body {
 .btnEdit:active,
 .btnDelete:active {
 	transform: translateY(0.1rem);
+}
+
+.list-container {
+	width: 100%;
+	@media (min-width: 600px) {
+		display: none;
+	}
+}
+
+.contact-list {
+	width: 100%;
+}
+
+.contact-number {
+	width: 100%;
+	font-size: 1.8rem;
+	overflow: hidden;
+	border-bottom: 0.1rem solid #000;
+	position: relative;
+}
+
+#expand-contact {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+}
+
+.contact-name__list {
+	font-size: 3rem;
+	font-weight: 600;
+}
+
+.contact-list li:nth-child(even) {
+	background-color: #fff;
+}
+
+.contact-list li:nth-child(odd) {
+	background-color: #ccc;
+}
+
+.expand-shown {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	opacity: 0;
+	transition: all 0.1s 0.1s;
+}
+
+.contact-info {
+	padding: 1rem 2rem;
+	max-height: 10rem;
+	overflow: hidden;
+	transition: max-height 0.3s;
+}
+
+#expand-contact:checked ~ .contact-info {
+	max-height: 20rem;
+}
+
+#expand-contact:checked ~ .contact-info > .expand-shown {
+	opacity: 1;
+}
+
+.contact-info button {
+	margin-left: 1rem;
 }
