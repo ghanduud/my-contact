@@ -333,7 +333,7 @@ function updateContactInTable(contact) {
 
 function updateContactInList(contact) {
 	console.log(contact);
-	const item = contactList.querySelector('li[data-contact-id="${contact.id}"]');
+	const item = contactList.querySelector(`li[data-contact-id="${contact.id}"]`);
 
 	if (item) {
 		item.innerHTML = `<input type="checkbox" name="expandContact" id="expand-contact" />
