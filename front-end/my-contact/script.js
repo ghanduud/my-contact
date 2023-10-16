@@ -7,6 +7,7 @@ const btnAddContact = document.querySelector('.btnAddContact');
 const contactSearchInput = document.getElementById('contact-search');
 const btnsCloses = document.querySelectorAll('.btnClose');
 const loadingMessage = document.getElementById('loading-message');
+const contactList = document.querySelector('.contact-list');
 
 const api = 'http://localhost:8080/api/v1/';
 const contacts = [];
@@ -25,6 +26,7 @@ fetch(`${api}contacts`)
 		// Iterate over the fetched contacts and add them to the table
 		contacts.forEach((contact) => {
 			addContactToTable(contact);
+			addContactToList(contact);
 		});
 	})
 	.catch((error) => {
@@ -144,6 +146,7 @@ function addUser(event) {
 
 			// Add the new contact to the table
 			addContactToTable(data);
+			addContactToList(data);
 
 			// Reset the form input values
 			addUserForm.reset();
@@ -302,4 +305,32 @@ function updateContactInTable(contact) {
 		<td><button class="btnDelete">Delete</button></td>
 	  `;
 	}
+}
+
+function addContactToList(contact) {
+	const html = `
+	<li class="contact-number" data-contact-id="${contact.id}">
+						<input type="checkbox" name="expandContact" id="expand-contact" />
+						<div class="contact-info">
+							<div class="always-shown">
+								<div>
+									<p class="contact-name__list">${contact.userName}</p>
+									<p>${contact.phoneNumber}</p>
+								</div>
+							</div>
+							<div class="expand-shown">
+								<div>
+									<p>${contact.email}</p>
+									<p>${contact.address}</p>
+								</div>
+								<div>
+									<button class="btnEdit">Edit</button>
+									<button class="btnDelete">Delete</button>
+								</div>
+							</div>
+						</div>
+					</li>
+	`;
+
+	contactList.insertAdjacentHTML('beforeend', html);
 }
