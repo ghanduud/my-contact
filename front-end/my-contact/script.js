@@ -13,27 +13,28 @@ const api = 'http://localhost:8080/api/v1/';
 const contacts = [];
 
 // Fetch data from the API
-fetch(`${api}contacts`)
-	.then((response) => response.json())
-	.then((data) => {
-		console.log(data);
-		// Save the fetched contacts in the 'contacts' array
-		contacts.push(...data);
+// fetch(`${api}contacts`)
+// 	.then((response) => response.json())
+// 	.then((data) => {
+// 		console.log(data);
+// 		// Save the fetched contacts in the 'contacts' array
+// 		contacts.push(...data);
 
-		// Remove the loading message
-		loadingMessage.style.display = 'none';
+// 		// Remove the loading message
+// 		loadingMessage.style.display = 'none';
 
-		// Iterate over the fetched contacts and add them to the table
-		contacts.forEach((contact) => {
-			addContactToTable(contact);
-			addContactToList(contact);
-		});
-	})
-	.catch((error) => {
-		// Handle any errors that occur during the fetch
-		console.error('Error fetching contacts:', error);
-		loadingMessage.textContent = 'Error fetching contacts';
-	});
+// 		// Iterate over the fetched contacts and add them to the table
+// 		contacts.forEach((contact) => {
+// 			addContactToTable(contact);
+// 			addContactToList(contact);
+// 		});
+// 	})
+// 	.catch((error) => {
+// 		// Handle any errors that occur during the fetch
+// 		console.error('Error fetching contacts:', error);
+// 		loadingMessage.textContent = 'Error fetching contacts';
+// 	});
+loadContact();
 
 btnsCloses.forEach((btn) => {
 	btn.addEventListener('click', () => {
@@ -394,4 +395,24 @@ function addContactToList(contact) {
 
 function clearContactList() {
 	contactList.innerHTML = '';
+}
+
+//load data function using async
+
+async function loadContact() {
+	try {
+		let data = await fetch(`${api}contacts`);
+		data = await data.json();
+		console.log(data);
+		contacts.push(...data);
+		loadingMessage.style.display = 'none';
+
+		contacts.forEach((contact) => {
+			addContactToList();
+			addContactToTable();
+		});
+	} catch (e) {
+		console.error('Error fetching contacts:', e);
+		loadingMessage.textContent = 'Error fetching contacts';
+	}
 }
