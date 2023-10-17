@@ -1,86 +1,64 @@
-const table = document.querySelector('.contact-table');
-const addUserFormContainer = document.querySelector('.form-container__add');
-const editUserFormContainer = document.querySelector('.form-container__edit');
-const addUserForm = document.querySelector('.add-form');
-const editUserForm = document.querySelector('.edit-form');
-const btnAddContact = document.querySelector('.btnAddContact');
-const contactSearchInput = document.getElementById('contact-search');
-const btnsCloses = document.querySelectorAll('.btnClose');
-const loadingMessage = document.getElementById('loading-message');
-const contactList = document.querySelector('.contact-list');
+const table = document.querySelector(".contact-table");
+const addUserFormContainer = document.querySelector(".form-container__add");
+const editUserFormContainer = document.querySelector(".form-container__edit");
+const addUserForm = document.querySelector(".add-form");
+const editUserForm = document.querySelector(".edit-form");
+const btnAddContact = document.querySelector(".btnAddContact");
+const contactSearchInput = document.getElementById("contact-search");
+const btnsCloses = document.querySelectorAll(".btnClose");
+const loadingMessage = document.getElementById("loading-message");
+const contactList = document.querySelector(".contact-list");
 
-const api = 'http://localhost:8080/api/v1/';
+const api = "http://localhost:8080/api/v1/";
 const contacts = [];
 
-// Fetch data from the API
-// fetch(`${api}contacts`)
-// 	.then((response) => response.json())
-// 	.then((data) => {
-// 		console.log(data);
-// 		// Save the fetched contacts in the 'contacts' array
-// 		contacts.push(...data);
-
-// 		// Remove the loading message
-// 		loadingMessage.style.display = 'none';
-
-// 		// Iterate over the fetched contacts and add them to the table
-// 		contacts.forEach((contact) => {
-// 			addContactToTable(contact);
-// 			addContactToList(contact);
-// 		});
-// 	})
-// 	.catch((error) => {
-// 		// Handle any errors that occur during the fetch
-// 		console.error('Error fetching contacts:', error);
-// 		loadingMessage.textContent = 'Error fetching contacts';
-// 	});
 loadContact();
 
 btnsCloses.forEach((btn) => {
-	btn.addEventListener('click', () => {
-		addUserFormContainer.classList.add('hidden');
-		editUserFormContainer.classList.add('hidden');
+	btn.addEventListener("click", () => {
+		addUserFormContainer.classList.add("hidden");
+		editUserFormContainer.classList.add("hidden");
 	});
 });
 
-document.addEventListener('keydown', (event) => {
-	if (event.key === 'Escape') {
-		addUserFormContainer.classList.add('hidden');
-		editUserFormContainer.classList.add('hidden');
+document.addEventListener("keydown", (event) => {
+	if (event.key === "Escape") {
+		addUserFormContainer.classList.add("hidden");
+		editUserFormContainer.classList.add("hidden");
 	}
 });
 
-addUserFormContainer.addEventListener('click', (event) => {
+addUserFormContainer.addEventListener("click", (event) => {
 	if (event.target === addUserFormContainer) {
-		addUserFormContainer.classList.add('hidden');
+		addUserFormContainer.classList.add("hidden");
 	}
 });
 
-editUserFormContainer.addEventListener('click', (event) => {
+editUserFormContainer.addEventListener("click", (event) => {
 	if (event.target === editUserFormContainer) {
-		editUserFormContainer.classList.add('hidden');
+		editUserFormContainer.classList.add("hidden");
 	}
 });
 // Add event listener to the table for handling delete button clicks
-table.addEventListener('click', handleDelete);
-contactList.addEventListener('click', handleDelete);
+table.addEventListener("click", handleDelete);
+contactList.addEventListener("click", handleDelete);
 
 // Add event listener to the "Add User" button to show the add user form
-btnAddContact.addEventListener('click', showAddUserForm);
+btnAddContact.addEventListener("click", showAddUserForm);
 
 // Add event listener to the add user form for handling form submission
-addUserForm.addEventListener('submit', addUser);
+addUserForm.addEventListener("submit", addUser);
 
-contactSearchInput.addEventListener('input', handleContactSearch);
+contactSearchInput.addEventListener("input", handleContactSearch);
 
-table.addEventListener('click', handleEdit);
-contactList.addEventListener('click', handleEdit);
+table.addEventListener("click", handleEdit);
+contactList.addEventListener("click", handleEdit);
 
 // Function to handle delete button clicks
 function handleDelete(event) {
-	if (event.target.classList.contains('btnDelete')) {
-		const row = event.target.closest('tr');
-		const listItem = event.target.closest('li');
+	if (event.target.classList.contains("btnDelete")) {
+		const row = event.target.closest("tr");
+		const listItem = event.target.closest("li");
 		let id;
 
 		if (row) {
@@ -95,7 +73,7 @@ function handleDelete(event) {
 		if (contact) {
 			// Send DELETE request to the API
 			fetch(`${api}contacts/${id}`, {
-				method: 'DELETE',
+				method: "DELETE",
 			})
 				.then((response) => {
 					if (response.ok) {
@@ -111,14 +89,14 @@ function handleDelete(event) {
 							addContactToList(contact);
 						});
 
-						console.log('Contact deleted successfully');
+						console.log("Contact deleted successfully");
 					} else {
-						throw new Error('Failed to delete contact');
+						throw new Error("Failed to delete contact");
 					}
 				})
 				.catch((error) => {
 					// Handle any errors that occur during the DELETE request
-					console.error('Error deleting contact:', error);
+					console.error("Error deleting contact:", error);
 				});
 		}
 	}
@@ -127,7 +105,7 @@ function handleDelete(event) {
 // Function to show the add user form
 function showAddUserForm() {
 	addUserForm.reset();
-	addUserFormContainer.classList.remove('hidden');
+	addUserFormContainer.classList.remove("hidden");
 }
 
 // Function to add a user to the array and table
@@ -135,10 +113,10 @@ function addUser(event) {
 	event.preventDefault(); // Prevent the form from submitting and refreshing the page
 
 	// Get the form input values
-	const userName = document.getElementById('add-user-name').value;
-	const userEmail = document.getElementById('add-user-email').value;
-	const phoneNumber = document.getElementById('add-phone-number').value;
-	const address = document.getElementById('add-address').value;
+	const userName = document.getElementById("add-user-name").value;
+	const userEmail = document.getElementById("add-user-email").value;
+	const phoneNumber = document.getElementById("add-phone-number").value;
+	const address = document.getElementById("add-address").value;
 
 	// Create the new contact object
 	const newContact = {
@@ -150,9 +128,9 @@ function addUser(event) {
 
 	// Make a POST request to the API to add the new contact
 	fetch(`${api}contacts`, {
-		method: 'POST',
+		method: "POST",
 		headers: {
-			'Content-Type': 'application/json',
+			"Content-Type": "application/json",
 		},
 		body: JSON.stringify(newContact),
 	})
@@ -169,11 +147,11 @@ function addUser(event) {
 			addUserForm.reset();
 
 			// Hide the add user form
-			addUserFormContainer.classList.add('hidden');
+			addUserFormContainer.classList.add("hidden");
 		})
 		.catch((error) => {
 			// Handle any errors that occur during the POST request
-			console.error('Error adding contact:', error);
+			console.error("Error adding contact:", error);
 		});
 }
 
@@ -190,7 +168,7 @@ function addContactToTable(contact) {
 		<td><button class="btnDelete">Delete</button></td>
 	  </tr>`;
 
-	table.insertAdjacentHTML('beforeend', html);
+	table.insertAdjacentHTML("beforeend", html);
 }
 
 // Function to generate a unique id
@@ -203,7 +181,8 @@ function handleContactSearch(event) {
 
 	const filteredContacts = contacts.filter(
 		(contact) =>
-			contact.userName.toLowerCase().includes(searchQuery) || contact.phoneNumber.includes(searchQuery)
+			contact.userName.toLowerCase().includes(searchQuery) ||
+			contact.phoneNumber.includes(searchQuery)
 	);
 
 	clearTable();
@@ -222,9 +201,9 @@ function clearTable() {
 }
 
 function handleEdit(event) {
-	if (event.target.classList.contains('btnEdit')) {
-		const row = event.target.closest('tr');
-		const listItem = event.target.closest('li');
+	if (event.target.classList.contains("btnEdit")) {
+		const row = event.target.closest("tr");
+		const listItem = event.target.closest("li");
 		let id;
 
 		if (row) {
@@ -238,10 +217,10 @@ function handleEdit(event) {
 
 		if (contact) {
 			// Fill the edit form fields with the contact's data
-			document.getElementById('user-name').value = contact.userName;
-			document.getElementById('user-email').value = contact.email;
-			document.getElementById('phone-number').value = contact.phoneNumber;
-			document.getElementById('address').value = contact.address;
+			document.getElementById("user-name").value = contact.userName;
+			document.getElementById("user-email").value = contact.email;
+			document.getElementById("phone-number").value = contact.phoneNumber;
+			document.getElementById("address").value = contact.address;
 
 			// Show the edit form
 			showEditForm(contact);
@@ -254,10 +233,10 @@ function showEditForm(contact) {
 	editUserForm.dataset.contactId = contact.id;
 
 	// Remove the "hidden" class to show the edit form
-	editUserFormContainer.classList.remove('hidden');
+	editUserFormContainer.classList.remove("hidden");
 
 	// Add event listener to the edit form for handling form submission
-	editUserForm.addEventListener('submit', updateContact);
+	editUserForm.addEventListener("submit", updateContact);
 }
 
 function updateContact(event) {
@@ -266,10 +245,10 @@ function updateContact(event) {
 	const contactId = parseInt(this.dataset.contactId);
 
 	// Get the form input values
-	const userName = document.getElementById('user-name').value;
-	const userEmail = document.getElementById('user-email').value;
-	const phoneNumber = document.getElementById('phone-number').value;
-	const address = document.getElementById('address').value;
+	const userName = document.getElementById("user-name").value;
+	const userEmail = document.getElementById("user-email").value;
+	const phoneNumber = document.getElementById("phone-number").value;
+	const address = document.getElementById("address").value;
 
 	// Find the contact in the array based on the ID
 	const contact = contacts.find((contact) => contact.id === contactId);
@@ -285,9 +264,9 @@ function updateContact(event) {
 
 		// Send PUT request to the API
 		fetch(`${api}contacts/${contactId}`, {
-			method: 'PUT',
+			method: "PUT",
 			headers: {
-				'Content-Type': 'application/json',
+				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(temp),
 		})
@@ -302,21 +281,21 @@ function updateContact(event) {
 					// Update the contact's data in the table
 					updateContactInTable(contact);
 					updateContactInList(contact);
-					console.log('Contact updated successfully');
+					console.log("Contact updated successfully");
 				} else {
-					throw new Error('Failed to update contact');
+					throw new Error("Failed to update contact");
 				}
 			})
 			.catch((error) => {
 				// Handle any errors that occur during the PUT request
-				console.error('Error updating contact:', error);
+				console.error("Error updating contact:", error);
 			});
 
 		// Reset the form input values
 		this.reset();
 
 		// Hide the edit form
-		editUserFormContainer.classList.add('hidden');
+		editUserFormContainer.classList.add("hidden");
 	}
 }
 
@@ -390,11 +369,11 @@ function addContactToList(contact) {
 					</li>
 	`;
 
-	contactList.insertAdjacentHTML('beforeend', html);
+	contactList.insertAdjacentHTML("beforeend", html);
 }
 
 function clearContactList() {
-	contactList.innerHTML = '';
+	contactList.innerHTML = "";
 }
 
 //load data function using async
@@ -405,14 +384,14 @@ async function loadContact() {
 		data = await data.json();
 		console.log(data);
 		contacts.push(...data);
-		loadingMessage.style.display = 'none';
+		loadingMessage.style.display = "none";
 
 		contacts.forEach((contact) => {
-			addContactToList();
-			addContactToTable();
+			addContactToList(contact);
+			addContactToTable(contact);
 		});
 	} catch (e) {
-		console.error('Error fetching contacts:', e);
-		loadingMessage.textContent = 'Error fetching contacts';
+		console.error("Error fetching contacts:", e);
+		loadingMessage.textContent = "Error fetching contacts";
 	}
 }
